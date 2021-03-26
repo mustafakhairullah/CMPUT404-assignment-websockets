@@ -63,6 +63,8 @@ class World:
 
 myWorld = World()
 
+# From chat.py example https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/WebSocketsExamples/chat.py
+
 
 class Client:
     def __init__(self):
@@ -76,6 +78,8 @@ class Client:
 
 
 clients = []
+
+# From chat.py example https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/WebSocketsExamples/chat.py
 
 
 def send_all(msg):
@@ -104,21 +108,26 @@ def hello():
 
 def read_ws(ws, client):
     '''A greenlet function that reads from the websocket and updates the world'''
-    # XXX: TODO IMPLEMENT ME
-    while True:
-        message = ws.receive()
-        print(f"WebSocket Recieved: {message}")
+    # From chat.py example https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/WebSocketsExamples/chat.py
+    try:
+        while True:
+            message = ws.receive()
+            print(f"WebSocket Recieved: {message}")
 
-        if (message is not None):
-            packet = json.loads(message)
-            send_all_json(packet)
+            if (message is not None):
+                packet = json.loads(message)
+                send_all_json(packet)
+            else:
+                break
+    except:
+        '''Done'''
 
 
 @sockets.route('/subscribe')
 def subscribe_socket(ws):
     '''Fufill the websocket URL of /subscribe, every update notify the
        websocket and read updates from the websocket '''
-    # XXX: TODO IMPLEMENT ME
+    # From chat.py example https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/WebSocketsExamples/chat.py
     client = Client()
     clients.append(client)
 
